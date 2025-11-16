@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listar Pacientes - GINPAC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+  <div class="min-h-screen p-4">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="mb-8">
+        <a href="/" class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition">
+          ← Volver al Inicio
+        </a>
+      </div>
+
+      <!-- Tabla de pacientes -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-slate-900 mb-8">Lista de Pacientes</h1>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-slate-100 border-b-2 border-slate-300">
+              <tr class="bg-blue-600 border-b border-blue-500">
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-white">Cédula</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-white">Nombres</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-white">Apellidos</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-white">Teléfono</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-white">Nacimiento</th>
+                  <th class="px-6 py-3 text-center text-sm font-semibold text-white">Acciones</th>
+              </tr>
+
+            </thead>
+            <tbody id="tablaPacientes" class="divide-y divide-slate-200">
+              <tr><td colspan="6" class="px-6 py-4 text-center text-slate-500">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function cargarPacientes() {
+      try {
+        const response = await fetch('/api/listar');
+        const result = await response.json();
+
+        const tabla = document.getElementById('tablaPacientes');
+        tabla.innerHTML = '';
+
+        if (!result.datos || result.datos.length === 0) {
+          tabla.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-slate-500">No hay pacientes registrados</td></tr>';
+          return;
+        }
+
+        result.datos.forEach(paciente => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-50';
+          row.innerHTML = `
+            <td class="px-6 py-4 font-semibold text-slate-900">${paciente.cedula}</td>
+            <td class="px-6 py-4 text-slate-700">${paciente.nombres}</td>
+            <td class="px-6 py-4 text-slate-700">${paciente.apellidos}</td>
+            <td class="px-6 py-4 text-slate-700">${paciente.telefono}</td>
+            <td class="px-6 py-4 text-slate-700">${paciente.fechaNacimiento}</td>
+            <td class="px-6 py-4">
+              <a href="/editar/${paciente.cedula}" class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded text-sm mr-2">Editar</a>
+              <button onclick="eliminarPaciente('${paciente.cedula}')" class="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded text-sm">Eliminar</button>
+            </td>
+          `;
+          tabla.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    async function eliminarPaciente(cedula) {
+      if (!confirm('¿Está seguro de que desea eliminar este paciente?')) return;
+
+      try {
+        const response = await fetch('/api/eliminar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cedula })
+        });
+
+        const result = await response.json();
+        if (result.exitoso) {
+          cargarPacientes();
+        } else {
+          alert('Error al eliminar: ' + result.mensaje);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    cargarPacientes();
+  </script>
+</body>
+</html>

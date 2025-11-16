@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GINPAC - Gestor de Pacientes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+  <div class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl">
+      <!-- Header -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-slate-900 mb-2">GINPAC</h1>
+          <p class="text-slate-600 text-lg">Gestor Interno de Pacientes - Clínica SaludTotal</p>
+        </div>
+        
+        <!-- Botones principales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a href="/crear" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition duration-200 text-center text-lg shadow-md hover:shadow-lg">
+            + Registrar Paciente
+          </a>
+          <a href="/listar" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg transition duration-200 text-center text-lg shadow-md hover:shadow-lg">
+            Ver Pacientes
+          </a>
+        </div>
+      </div>
+
+      <!-- Información del sistema -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">Información del Sistema</h2>
+        <div class="text-slate-600 space-y-2">
+          <p><strong>Estado:</strong> <span class="text-green-600">Activo</span></p>
+          <p><strong>Servicio SOAP:</strong> <a href="http://localhost:3000/soap?wsdl" target="_blank" class="text-blue-600 hover:underline">http://localhost:3000/soap?wsdl</a></p>
+          <p><strong>Arquitectura:</strong> SOAP con persistencia en XML</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://ginpac.local/pacientes"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="PacientesService"
+             targetNamespace="http://ginpac.local/pacientes">
+
+  <types>
+    <xsd:schema targetNamespace="http://ginpac.local/pacientes">
+      <!-- Tipo Paciente -->
+      <xsd:complexType name="Paciente">
+        <xsd:sequence>
+          <xsd:element name="cedula" type="xsd:string"/>
+          <xsd:element name="nombres" type="xsd:string"/>
+          <xsd:element name="apellidos" type="xsd:string"/>
+          <xsd:element name="telefono" type="xsd:string"/>
+          <xsd:element name="fechaNacimiento" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- Respuesta operaciones -->
+      <xsd:complexType name="Respuesta">
+        <xsd:sequence>
+          <xsd:element name="exitoso" type="xsd:boolean"/>
+          <xsd:element name="mensaje" type="xsd:string"/>
+          <xsd:element name="datos" type="xsd:anyType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- Array de Pacientes -->
+      <xsd:complexType name="ListaPacientes">
+        <xsd:sequence>
+          <xsd:element name="paciente" type="tns:Paciente" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+
+  <!-- Mensajes -->
+  <message name="RegistrarPacienteRequest">
+    <part name="paciente" type="tns:Paciente"/>
+  </message>
+
+  <message name="RegistrarPacienteResponse">
+    <part name="respuesta" type="tns:Respuesta"/>
+  </message>
+
+  <message name="BuscarPacienteRequest">
+    <part name="cedula" type="xsd:string"/>
+  </message>
+
+  <message name="BuscarPacienteResponse">
+    <part name="respuesta" type="tns:Respuesta"/>
+  </message>
+
+  <message name="ListarPacientesRequest"/>
+
+  <message name="ListarPacientesResponse">
+    <part name="respuesta" type="tns:Respuesta"/>
+  </message>
+
+  <message name="ActualizarPacienteRequest">
+    <part name="cedula" type="xsd:string"/>
+    <part name="paciente" type="tns:Paciente"/>
+  </message>
+
+  <message name="ActualizarPacienteResponse">
+    <part name="respuesta" type="tns:Respuesta"/>
+  </message>
+
+  <message name="EliminarPacienteRequest">
+    <part name="cedula" type="xsd:string"/>
+  </message>
+
+  <message name="EliminarPacienteResponse">
+    <part name="respuesta" type="tns:Respuesta"/>
+  </message>
+
+  <!-- Puerto (Interface) -->
+  <portType name="PacientesPort">
+    <operation name="registrarPaciente">
+      <input message="tns:RegistrarPacienteRequest"/>
+      <output message="tns:RegistrarPacienteResponse"/>
+    </operation>
+    <operation name="buscarPaciente">
+      <input message="tns:BuscarPacienteRequest"/>
+      <output message="tns:BuscarPacienteResponse"/>
+    </operation>
+    <operation name="listarPacientes">
+      <input message="tns:ListarPacientesRequest"/>
+      <output message="tns:ListarPacientesResponse"/>
+    </operation>
+    <operation name="actualizarPaciente">
+      <input message="tns:ActualizarPacienteRequest"/>
+      <output message="tns:ActualizarPacienteResponse"/>
+    </operation>
+    <operation name="eliminarPaciente">
+      <input message="tns:EliminarPacienteRequest"/>
+      <output message="tns:EliminarPacienteResponse"/>
+    </operation>
+  </portType>
+
+  <!-- Binding -->
+  <binding name="PacientesBinding" type="tns:PacientesPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="registrarPaciente">
+      <soap:operation soapAction="registrarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="buscarPaciente">
+      <soap:operation soapAction="buscarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="listarPacientes">
+      <soap:operation soapAction="listarPacientes"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="actualizarPaciente">
+      <soap:operation soapAction="actualizarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="eliminarPaciente">
+      <soap:operation soapAction="eliminarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <!-- Servicio -->
+  <service name="PacientesService">
+    <port name="PacientesPort" binding="tns:PacientesBinding">
+      <soap:address location="http://localhost:3000/soap"/>
+    </port>
+  </service>
+</definitions>

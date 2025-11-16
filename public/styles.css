@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Animaciones suaves */
+button, a {
+  transition: all 0.3s ease;
+}
+
+/* Estilo para tablas */
+table {
+  border-collapse: collapse;
+}
+
+table th {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+}
+
+/* Estilos de formulario */
+input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
