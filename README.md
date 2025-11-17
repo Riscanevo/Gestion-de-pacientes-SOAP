@@ -604,8 +604,8 @@ Verifica que el servidor esté corriendo en http://localhost:3000/soap?wsdl
 ## Autor
 
 **Proyecto Académico**
-- Parcial Final: Servicios Web SOAP
-- Institución: Universidad
+- Parcial Final: Arquitectura y diseño del software
+- Institución: Universidad Fundación de estudios superiores comfanorte - FESC
 - Fecha: Noviembre 2025
 
 ---
