@@ -377,7 +377,7 @@ Content-Type: application/json
 
 ## Estructura del Proyecto
 
-\`\`\`
+
 ginpac-soap/
 ├── README.md                          # Este archivo
 ├── package.json                       # Dependencias de Node.js
@@ -407,7 +407,7 @@ ginpac-soap/
     ├── listar.html                   # Ver pacientes
     ├── editar.html                   # Editar paciente
     └── styles.css                    # Estilos Tailwind
-\`\`\`
+
 
 ---
 
@@ -604,7 +604,7 @@ Verifica que el servidor esté corriendo en http://localhost:3000/soap?wsdl
 ## Autor
 
 **Proyecto Académico**
-- Parcial Final: Arquitectura y diseño del software
+- Parcial Final: Arquitectura Cliente - Servidor
 - Institución: Universidad Fundación de estudios superiores comfanorte - FESC
 - Fecha: Noviembre 2025
 
