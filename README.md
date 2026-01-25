@@ -604,7 +604,7 @@ Verifica que el servidor esté corriendo en http://localhost:3000/soap?wsdl
 ## Autor
 
 **Proyecto Académico**
-- Parcial Final: Arquitectura Cliente - Servidor
+- Parcial Final: Arquitectura Cliente - Servidor (Realizar un crud)
 - Institución: Universidad Fundación de estudios superiores comfanorte - FESC
 - Fecha: Noviembre 2025
 
